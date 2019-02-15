@@ -1,14 +1,16 @@
 package com.guzichenko.dao;
 
+import java.util.List;
+
 import com.guzichenko.domain.Client;
 
 public interface ClientDao {
 
 	/**
 	 *
-	 * @param client
-	 * @return
 	 */
 	boolean saveClient(Client client);
+
+	List<Client> getAllClients();
 
 }

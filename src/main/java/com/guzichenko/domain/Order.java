@@ -6,6 +6,5 @@ public class Order {
 
 	private long id;
 	private Client client;
-	List<Product> products;
-
+	private List<Product> products;
 }
