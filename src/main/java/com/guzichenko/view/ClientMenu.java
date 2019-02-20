@@ -5,13 +5,10 @@ import java.io.IOException;
 
 import com.guzichenko.services.ClientService;
 
-public class ClientMenu {
-	private final BufferedReader br;
-	private final ClientService clientService;
+public class ClientMenu extends AbstractMenu {
 
 	public ClientMenu(BufferedReader br, ClientService clientService) {
-		this.br = br;
-		this.clientService = clientService;
+		super(br, clientService);
 	}
 
 	public void show() throws IOException {

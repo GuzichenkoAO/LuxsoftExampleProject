@@ -39,6 +39,22 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
+	public Client findClient(long clientId) {
+		return clientDao.findClient(clientId);
+
+	}
+
+	@Override
+	public void modifyClient(long clientId, String newName, String newSurname, int newAge, String newPhone, String newEmail) {
+		Client client = clientDao.findClient(clientId);
+		client.setName(newName);
+		client.setSurname(newSurname);
+		client.setAge(newAge);
+		client.setPhone(newPhone);
+		client.setEmail(newEmail);
+	}
+
+	@Override
 	public List<Client> getAllClients() {
 		return clientDao.getAllClients();
 	}

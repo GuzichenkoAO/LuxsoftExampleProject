@@ -13,6 +13,10 @@ public interface ClientService {
 
 	void createClient(String name, String surname, int age, String phone, String email);
 
+	Client findClient(long clientId);
+
+	void modifyClient(long clientId, String newName, String newSurname, int newAge, String newPhone, String newEmail);
+
 	List<Client> getAllClients();
 
 	void deleteClient();

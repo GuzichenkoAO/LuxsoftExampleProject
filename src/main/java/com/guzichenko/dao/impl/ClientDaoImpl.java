@@ -27,6 +27,12 @@ public class ClientDaoImpl implements ClientDao {
 	}
 
 	@Override
+	public Client findClient(long clientId) {
+		return map.get(clientId);
+	}
+
+
+	@Override
 	public List<Client> getAllClients() {
 		return new ArrayList<>(map.values());
 	}

@@ -6,14 +6,10 @@ import java.io.IOException;
 import com.guzichenko.domain.Client;
 import com.guzichenko.services.ClientService;
 
-public class AdminMenu {
-
-	private final BufferedReader br;
-	private final ClientService clientService;
+public class AdminMenu extends AbstractMenu {
 
 	public AdminMenu(BufferedReader br, ClientService clientService) {
-		this.br = br;
-		this.clientService = clientService;
+		super(br, clientService);
 	}
 
 	public void show() throws IOException {
@@ -25,10 +21,14 @@ public class AdminMenu {
 					break;
 				case "2":
 					System.out.println("Modify client");
+					modifyClient();
 					break;
 				case "4":
 					System.out.println("All clients:");
 					showAllClients();
+					break;
+				case "5":
+					createClient();
 					break;
 				case "9":
 					return;
@@ -39,6 +39,28 @@ public class AdminMenu {
 					break;
 			}
 		}
+	}
+
+	private void modifyClient() throws IOException {
+		System.out.println("Input client id: ");
+		int id = readInteger();
+		Client client = clientService.findClient(id);
+		if (client != null) {
+			System.out.println("Input name: ");
+			String name = br.readLine();
+			System.out.println("Input surname: ");
+			String surname = br.readLine();
+			System.out.println("Input age: ");
+			int age = readInteger();
+			System.out.println("Input phone number: ");
+			String phoneNumber = br.readLine();
+			System.out.println("Input email: ");
+			String email = br.readLine();
+			clientService.modifyClient(id, name, surname, age, phoneNumber, email);
+		} else {
+			System.out.println("HHAHAHA");
+		}
+
 	}
 
 	private void createClient() throws IOException {
@@ -58,7 +80,7 @@ public class AdminMenu {
 	private void showMenu() {
 		System.out.println("1. Add client");
 		System.out.println("2. Modify client"); // by ID
-		System.out.println("3. Remove client");
+		System.out.println("3. Remove client"); // by ID
 		System.out.println("4. List all clients");
 		System.out.println();
 		System.out.println("5. Add product");
@@ -72,16 +94,6 @@ public class AdminMenu {
 		System.out.println();
 		System.out.println("R. Return");
 		System.out.println("E. Exit");
-	}
-
-	private int readInteger() {
-		try {
-			return Integer.parseInt(br.readLine());
-		}
-		catch (IOException | NumberFormatException ex) {
-			System.out.println("Input number please!!");
-			return readInteger();
-		}
 	}
 
 	private void showAllClients() {
