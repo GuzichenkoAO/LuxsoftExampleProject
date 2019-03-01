@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import com.guzichenko.dao.ClientDao;
+import com.guzichenko.dao.impl.ClientDBDao;
 import com.guzichenko.dao.impl.ClientDaoImpl;
 import com.guzichenko.services.ClientService;
 import com.guzichenko.services.impl.ClientServiceImpl;
@@ -17,7 +18,7 @@ import com.guzichenko.view.MainMenu;
 public class App {
 
 	public static void main(String[] args) throws IOException {
-		ClientDao clientDao = ClientDaoImpl.getInstance();
+		ClientDao clientDao = new ClientDBDao();
 		ValidationService validationService = new ValidationServiceImpl();
 		ClientService clientService = new ClientServiceImpl(clientDao, validationService);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
