@@ -10,6 +10,16 @@ import com.guzichenko.validators.ValidationService;
 
 public class ClientServiceImpl implements ClientService {
 
+	public int getI() {
+		return i;
+	}
+
+	public void setI(int i) {
+		this.i = i;
+	}
+
+	public int i = 0;
+
 	private ClientDao clientDao;
 	private ValidationService validationService;
 
@@ -41,7 +51,6 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public Client findClient(long clientId) {
 		return clientDao.findClient(clientId);
-
 	}
 
 	@Override

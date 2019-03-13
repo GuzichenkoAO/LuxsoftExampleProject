@@ -7,7 +7,8 @@ import com.guzichenko.domain.Client;
 public interface ClientDao {
 
 	/**
-	 *
+	 * @param
+	 * @throws
 	 */
 	boolean saveClient(Client client);
 

@@ -1,5 +1,7 @@
 package com.guzichenko.domain;
 
+import java.util.Objects;
+
 public class Client {
 
 	private long id;
@@ -91,5 +93,27 @@ public class Client {
 				", email='" + email + '\'' +
 				", phone='" + phone + '\'' +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Client client = (Client) o;
+		return getId() == client.getId() &&
+				getAge() == client.getAge() &&
+				Objects.equals(getName(), client.getName()) &&
+				Objects.equals(getSurname(), client.getSurname()) &&
+				Objects.equals(getEmail(), client.getEmail()) &&
+				Objects.equals(getPhone(), client.getPhone());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getId(), getName(), getSurname(), getAge(), getEmail(), getPhone());
 	}
 }
