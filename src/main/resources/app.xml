@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="
+	   http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/util
+	   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<util:constant id="in" static-field="java.lang.System.in"/>
+
+	<bean id="reader" class="java.io.InputStreamReader">
+		<constructor-arg name="in" ref="in"/>
+	</bean>
+
+	<bean id="bufferedReader" class="java.io.BufferedReader">
+		<constructor-arg name="in" ref="reader"/>
+	</bean>
+
+	<bean id="clientDao1" class="com.guzichenko.dao.impl.ClientDBDao"/>
+
+	<bean id="validationService" class="com.guzichenko.validators.impl.ValidationServiceImpl"/>
+
+	<bean id="clientService" class="com.guzichenko.services.impl.ClientServiceImpl" autowire="constructor"/>
+
+	<bean id="adminMenu" class="com.guzichenko.view.AdminMenu" autowire="constructor"/>
+
+	<bean id="clientMenu" class="com.guzichenko.view.ClientMenu" autowire="constructor"/>
+
+	<bean id="menu" class="com.guzichenko.view.MainMenu" autowire="constructor"/>
+
+</beans>

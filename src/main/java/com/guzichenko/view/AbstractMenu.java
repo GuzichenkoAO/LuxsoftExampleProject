@@ -7,7 +7,7 @@ import com.guzichenko.services.ClientService;
 
 abstract public class AbstractMenu {
 
-	protected final BufferedReader br;
+	protected final BufferedReader br ;
 	protected final ClientService clientService;
 
 	protected AbstractMenu(BufferedReader br, ClientService clientService) {
