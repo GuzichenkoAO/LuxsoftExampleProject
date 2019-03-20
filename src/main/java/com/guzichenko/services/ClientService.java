@@ -19,6 +19,5 @@ public interface ClientService {
 
 	List<Client> getAllClients();
 
-	void deleteClient();
-
+	void deleteClient(long id);
 }

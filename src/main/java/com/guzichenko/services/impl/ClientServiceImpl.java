@@ -69,7 +69,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public void deleteClient() {
-
+	public void deleteClient(long id) {
+		System.out.println("Client deleted");
 	}
 }

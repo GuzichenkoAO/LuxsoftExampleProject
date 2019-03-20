@@ -21,7 +21,7 @@ public class ClientDBDao implements ClientDao {
 	public ClientDBDao() {
 		try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASSWORD); Statement statement = connection.createStatement()) {
 			statement.execute(
-					"CREATE TABLE CLIENT(ID BIGINT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(20), SURNAME VARCHAR(20), AGE INT, PHONE VARCHAR(20), EMAIL VARCHAR(50));");
+					"CREATE TABLE IF NOT EXISTS CLIENT(ID BIGINT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(20), SURNAME VARCHAR(20), AGE INT, PHONE VARCHAR(20), EMAIL VARCHAR(50));");
 		}
 		catch (SQLException e) {
 			System.out.println("SOMETHING GOING WRONG!!!");
@@ -64,6 +64,7 @@ public class ClientDBDao implements ClientDao {
 			}
 		}
 		catch (SQLException e) {
+			e.printStackTrace();
 			System.out.println("CLIENT DIDN'T FIND!!!");
 		}
 		return null;
@@ -87,6 +88,7 @@ public class ClientDBDao implements ClientDao {
 			}
 		}
 		catch (SQLException e) {
+			e.printStackTrace();
 			System.out.println("CLIENT DIDN'T FIND!!!");
 		}
 		return result;
