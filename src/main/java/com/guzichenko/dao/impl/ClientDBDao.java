@@ -14,12 +14,17 @@ import com.guzichenko.domain.Client;
 
 public class ClientDBDao implements ClientDao {
 
-	private static final String DB_URL = "jdbc:h2:tcp://localhost/~/LuxoftShop";
-	private static final String LOGIN = "test";
-	private static final String PASSWORD = "test";
+	private final String dbUrl;
+	private final String login;
+	private final String pass;
 
-	public ClientDBDao() {
-		try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASSWORD); Statement statement = connection.createStatement()) {
+	public ClientDBDao(String dbUrl, String login, String pass) {
+		this.dbUrl = dbUrl;
+		this.login = login;
+		this.pass = pass;
+
+		try (Connection connection = DriverManager.getConnection(this.dbUrl, this.login, this.pass); Statement statement = connection
+				.createStatement()) {
 			statement.execute(
 					"CREATE TABLE IF NOT EXISTS CLIENT(ID BIGINT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(20), SURNAME VARCHAR(20), AGE INT, PHONE VARCHAR(20), EMAIL VARCHAR(50));");
 		}
@@ -30,7 +35,7 @@ public class ClientDBDao implements ClientDao {
 
 	@Override
 	public boolean saveClient(Client client) {
-		try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASSWORD);
+		try (Connection connection = DriverManager.getConnection(dbUrl, login, pass);
 				PreparedStatement statement = connection
 						.prepareStatement("INSERT INTO CLIENT(NAME, SURNAME, AGE, PHONE, EMAIL) VALUES(?,?,?,?,?)")) {
 
@@ -49,7 +54,7 @@ public class ClientDBDao implements ClientDao {
 
 	@Override
 	public Client findClient(long clientId) {
-		try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASSWORD);
+		try (Connection connection = DriverManager.getConnection(dbUrl, login, pass);
 				PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENT WHERE ID=?")) {
 			statement.setLong(1, clientId);
 			try (ResultSet resultSet = statement.executeQuery()) {
@@ -73,7 +78,7 @@ public class ClientDBDao implements ClientDao {
 	@Override
 	public List<Client> getAllClients() {
 		List<Client> result = new ArrayList<>();
-		try (Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASSWORD);
+		try (Connection connection = DriverManager.getConnection(dbUrl, login, pass);
 				Statement statement = connection.createStatement()) {
 			try (ResultSet resultSet = statement.executeQuery("SELECT * FROM CLIENT")) {
 				while (resultSet.next()) {
